@@ -11,5 +11,5 @@ public interface ShopCartService {
 
     HashMap<String, String> num(ArrayList<HashMap<String,String>> changeList,HashMap<String,String> headers);
 
-    ArrayList<HashMap<String,String>> info(HashMap<String,String> headers);
+    ArrayList<HashMap<String,Object>> info(HashMap<String,String> headers);
 }

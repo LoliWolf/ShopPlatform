@@ -26,5 +26,15 @@ public class OrderController {
         return orderService.ok(body,headers);
     }
 
+    @RequestMapping("/get")
+    private ArrayList<HashMap<String,Object>> get(@RequestBody HashMap<String,String> body,@RequestHeader HashMap<String,String> headers){
+        return orderService.get(body,headers);
+    }
+
+    @RequestMapping("check")
+    private ArrayList<HashMap<String,Object>> check(@RequestHeader HashMap<String,String> headers){
+        return orderService.check(headers);
+    }
+
 
 }

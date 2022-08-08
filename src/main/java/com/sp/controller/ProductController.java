@@ -31,7 +31,7 @@ public class ProductController {
     }
 
     @RequestMapping("/product")
-    private Product product(@RequestBody HashMap<String,String> map){
+    private HashMap<String,Object> product(@RequestBody HashMap<String,String> map){
         return productService.product(map);
     }
 }

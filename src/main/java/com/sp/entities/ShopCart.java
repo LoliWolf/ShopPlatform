@@ -29,15 +29,15 @@ public class ShopCart {
         price=product.getPrice();
     }
 
-    public HashMap<String ,String > toHashMap(){
-        HashMap<String, String> shopcart = new HashMap<>();
-        shopcart.put("num",String.valueOf(num));
-        shopcart.put("pid",String.valueOf(pid));
+    public HashMap<String ,Object > toHashMap(){
+        HashMap<String, Object> shopcart = new HashMap<>();
+        shopcart.put("num",num);
+        shopcart.put("pid",pid);
         shopcart.put("type_name",type_name);
         shopcart.put("image",image);
         shopcart.put("pname",pname);
         shopcart.put("pdetails",pdetails);
-        shopcart.put("price",String.valueOf(price));
+        shopcart.put("price",price);
         return shopcart;
     }
 

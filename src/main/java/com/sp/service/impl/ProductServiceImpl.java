@@ -33,7 +33,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product product(HashMap<String, String> map) {
-        return productDao.getProduct(Integer.parseInt(map.get("pid")));
+    public HashMap<String,Object> product(HashMap<String, String> map) {
+        if(productDao.IfProductExist(Integer.parseInt(map.get("pid"))) == 0){
+            HashMap<String, Object> ret = new HashMap<>();
+            ret.put("Exception","invalidPid");
+            return ret;
+        }
+        return productDao.getProduct(Integer.parseInt(map.get("pid"))).toHashMap();
     }
 }

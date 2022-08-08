@@ -29,7 +29,7 @@ public class ShopCartController {
         return shopCartService.num(changeList,headers);
     }
     @RequestMapping("/info")
-    private ArrayList<HashMap<String,String>> info(@RequestHeader HashMap<String,String> headers){
+    private ArrayList<HashMap<String,Object>> info(@RequestHeader HashMap<String,String> headers){
         return shopCartService.info(headers);
     }
 

@@ -13,6 +13,6 @@ import java.util.HashMap;
 public class Order {
     private String order_id;
     private boolean status;
-    private ArrayList<HashMap<String,String>> products;
+    private ArrayList<HashMap<String,Object>> products;
     private String address;
 }

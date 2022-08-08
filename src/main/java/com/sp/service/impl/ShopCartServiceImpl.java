@@ -42,7 +42,7 @@ public class ShopCartServiceImpl implements ShopCartService {
                     } else {
                         shopCartDao.update(uid, pid, num);
                     }
-                    if(shopCartDao.getNum(uid,pid)<0){
+                    if(shopCartDao.getNum(uid,pid)<0||productDao.IfProductExist(pid) == 0){
                         throw new EOFException();
                     }
                     else if(shopCartDao.getNum(uid,pid)==0){
@@ -68,7 +68,7 @@ public class ShopCartServiceImpl implements ShopCartService {
             verify.remove("uid");
             for (HashMap<String,String> del:delList){
                 int pid = Integer.parseInt(del.get("pid"));
-                if(shopCartDao.getCount(uid,pid)==0){
+                if(shopCartDao.getCount(uid,pid)==0||productDao.IfProductExist(pid) == 0){
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                     verify.remove("update");
                     verify.put("update","failed");
@@ -94,7 +94,7 @@ public class ShopCartServiceImpl implements ShopCartService {
             for (HashMap<String,String> change:changeList){
                 int pid = Integer.parseInt(change.get("pid"));
                 int num = Integer.parseInt(change.get("num"));
-                if(shopCartDao.getCount(uid,pid)==0||num<0){
+                if(shopCartDao.getCount(uid,pid)==0||num<0||productDao.IfProductExist(pid) == 0){
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                     verify.remove("update");
                     verify.put("update","failed");
@@ -114,10 +114,10 @@ public class ShopCartServiceImpl implements ShopCartService {
     }
 
     @Override
-    public ArrayList<HashMap<String, String>> info(HashMap<String, String> headers) {
+    public ArrayList<HashMap<String, Object>> info(HashMap<String, String> headers) {
         String token = headers.get("token");
         HashMap<String, String> verify = JWTUtils.verify(token);
-        ArrayList<HashMap<String, String>> arrayList = new ArrayList<>();
+        ArrayList<HashMap<String, Object>> arrayList = new ArrayList<>();
         if("success".equals(verify.get("login"))){
             int uid = Integer.parseInt(verify.get("uid"));
             verify.remove("uid");
@@ -127,7 +127,9 @@ public class ShopCartServiceImpl implements ShopCartService {
                 arrayList.add((new ShopCart(s.getNum(),product)).toHashMap());
             }
         }
-        arrayList.add(verify);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("login",verify.get("login"));
+        arrayList.add(map);
         return arrayList;
     }
 }

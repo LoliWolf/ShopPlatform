@@ -13,5 +13,5 @@ public interface ProductService {
 
     ArrayList<Product> allSorts(HashMap<String,String> map);
 
-    Product product(HashMap<String,String> map);
+    HashMap<String,Object> product(HashMap<String,String> map);
 }

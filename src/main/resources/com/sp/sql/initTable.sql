@@ -8,6 +8,8 @@ drop table if exists user_info;
 
 drop table if exists user_order;
 
+drop table if exists order_product;
+
 create table if not exists item_info
 (
     pid int auto_increment comment '商品id',
@@ -56,12 +58,17 @@ create table if not exists user_order
     order_id varchar(20) null comment '订单号',
     status   bool        null comment '支付状态',
     user_id  int         null comment '用户id',
-    pid  int         null comment '商品id',
-    pnum int         null comment '商品数量',
     address varchar(50) null comment '送货地址'
 )
     comment '用户订单表';
 
+create table if not exists order_product
+(
+    order_id varchar(20) null comment '订单号',
+    pid      int         null comment '商品id',
+    pnum     int         null comment '商品数量'
+)
+    comment '订单-商品表';
 
 #用户数据样例
 ;
