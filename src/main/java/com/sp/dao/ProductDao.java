@@ -13,4 +13,6 @@ public interface ProductDao {
     Product getProduct(@Param("pid") int pid);
 
     Product getProductsByPid(@Param("pid") int pid);
+
+    int IfProductExist(@Param("pid") int pid);
 }

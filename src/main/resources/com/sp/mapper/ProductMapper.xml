@@ -15,6 +15,9 @@
     <select id="getProductsByPid" resultType="Product">
         select pid,image,pname,pdetails,price,(select type_name from item_type where item_info.type_id = item_type.type_id) type_name from item_info where pid = #{pid};
     </select>
+    <select id="IfProductExist" resultType="int">
+        select count(*) from item_info where pid = #{pid};
+    </select>
 <!--    <insert id="">-->
 <!--        -->
 <!--    </insert>-->

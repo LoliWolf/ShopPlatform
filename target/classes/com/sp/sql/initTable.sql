@@ -56,7 +56,8 @@ create table if not exists user_order
     order_id varchar(20) null comment '订单号',
     status   bool        null comment '支付状态',
     user_id  int         null comment '用户id',
-    pid  int         null comment '商品id'
+    pid  int         null comment '商品id',
+    pnum int         null comment '商品数量'
 )
     comment '用户订单表';
 
