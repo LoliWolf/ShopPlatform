@@ -4,7 +4,7 @@ import com.sp.entities.User;
 import com.sp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+;
 import java.util.HashMap;
 
 
@@ -32,7 +32,6 @@ public class UserController {
 
     @RequestMapping("/update")
     private HashMap<String,String> update(@RequestBody HashMap<String,String> map,@RequestHeader HashMap<String,String> headers){
-        map.put("token",headers.get("token"));
-        return user.update(map);
+        return user.update(map,headers);
     }
 }

@@ -24,5 +24,8 @@
     <select id="getUserCart" resultType="ShopCart">
         select pid,num from user_cart where user_id = #{uid};
     </select>
+    <delete id="clear">
+        delete from user_cart where user_id = #{uid};
+    </delete>
 
 </mapper>

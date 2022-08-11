@@ -1,13 +1,12 @@
 package com.sp.entities;
 
-import ch.qos.logback.core.joran.spi.NoAutoStart;
-import com.sp.controller.ShopCartController;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 
-@NoAutoStart
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class ShopCart {

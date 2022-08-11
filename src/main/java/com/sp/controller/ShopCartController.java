@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 @RestController
@@ -31,6 +32,10 @@ public class ShopCartController {
     @RequestMapping("/info")
     private ArrayList<HashMap<String,Object>> info(@RequestHeader HashMap<String,String> headers){
         return shopCartService.info(headers);
+    }
+    @RequestMapping("/clear")
+    private HashMap<String,String> clear(@RequestHeader HashMap<String,String> headers){
+        return shopCartService.clear(headers);
     }
 
 }

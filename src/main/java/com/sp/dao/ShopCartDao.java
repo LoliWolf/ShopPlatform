@@ -22,4 +22,6 @@ public interface ShopCartDao {
 
     ArrayList<ShopCart> getUserCart(@Param("uid") int uid);
 
+    void clear(@Param("uid") int uid);
+
 }

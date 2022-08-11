@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService {
         return map;
     }
     @Override
-    public HashMap<String,String> info(@RequestBody HashMap<String,String> map){
-        HashMap<String, String> ret = JWTUtils.verify(map.get("token"));
+    public HashMap<String,String> info(@RequestBody HashMap<String,String> headers){
+        HashMap<String, String> ret = JWTUtils.verify(headers.get("token"));
         if("success".equals(ret.get("login"))){
             HashMap<String, String> userMap = userDao.get(Integer.parseInt(ret.get("uid"))).toHashMap();
             for (String s : userMap.keySet()) {
@@ -48,8 +48,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public HashMap<String, String> update(HashMap<String, String> map) {
-        HashMap<String, String> verify = JWTUtils.verify(map.get("token"));
+    public HashMap<String, String> update(HashMap<String, String> map,HashMap<String,String> headers) {
+        HashMap<String, String> verify = JWTUtils.verify(headers.get("token"));
         if("success".equals(verify.get("login"))){
             userDao.update(Integer.parseInt(verify.get("uid")),map.get("mobile"),map.get("username"),map.get("address"),map.get("sex"));
             verify.put("update","success");

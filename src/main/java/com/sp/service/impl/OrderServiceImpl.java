@@ -37,7 +37,6 @@ public class OrderServiceImpl implements OrderService {
             verify.remove("uid");
             String address = userDao.get(uid).getAddress();
             String orderId = MathUtils.getRandomNumString(10);
-            //防止订单号重复
             while(orderDao.ifOrderIdExist(orderId) != 0){
                 orderId = MathUtils.getRandomNumString(10);
             }
@@ -55,7 +54,6 @@ public class OrderServiceImpl implements OrderService {
             catch (Exception e){
                 //如果pid不存在或商品数量有误则回滚返回失败
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                System.out.println(e);
                 verify.put("create","failed");
                 verify.put("Exception","InvalidPid/Pnum");
             }
@@ -86,8 +84,6 @@ public class OrderServiceImpl implements OrderService {
                 details = new HashMap<>();
                 details.put("order","invalid");
             }
-            details.put("login","success");
-            products.add(details);
             return products;
         }
         else {
@@ -114,9 +110,6 @@ public class OrderServiceImpl implements OrderService {
                 map.put("order",order);
                 orderList.add(map);
             }
-            HashMap<String, Object> details = new HashMap<>();
-            details.put("login","success");
-            orderList.add(details);
             return orderList;
         }
         else {

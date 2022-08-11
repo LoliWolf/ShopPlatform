@@ -127,9 +127,26 @@ public class ShopCartServiceImpl implements ShopCartService {
                 arrayList.add((new ShopCart(s.getNum(),product)).toHashMap());
             }
         }
+        else {
         HashMap<String, Object> map = new HashMap<>();
         map.put("login",verify.get("login"));
         arrayList.add(map);
+        }
         return arrayList;
     }
+
+    @Override
+    public HashMap<String, String> clear(HashMap<String, String> headers) {
+        String token = headers.get("token");
+        HashMap<String, String> verify = JWTUtils.verify(token);
+        if("success".equals(verify.get("login"))){
+            int uid = Integer.parseInt(verify.get("uid"));
+            verify.remove("uid");
+            shopCartDao.clear(uid);
+            verify.put("update","success");
+        }
+        return verify;
+    }
+
+
 }

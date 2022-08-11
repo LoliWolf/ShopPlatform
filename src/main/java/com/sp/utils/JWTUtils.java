@@ -13,9 +13,8 @@ import java.util.HashMap;
 @Data
 public class JWTUtils {
     public static String get(User user){//获取令牌
-        HashMap<String,Object> map = new HashMap<>();
         Calendar instance = Calendar.getInstance();
-        instance.add(Calendar.MINUTE,20);
+        instance.add(Calendar.HOUR,24);
         return JWT.create()
                 .withExpiresAt(instance.getTime())//指定令牌过期时间
                 .withClaim("uid",user.getUid())
