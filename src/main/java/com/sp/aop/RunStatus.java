@@ -31,5 +31,4 @@ public class RunStatus {
             log.info(key + " : " + args[i++]);
         }
     }
-
 }

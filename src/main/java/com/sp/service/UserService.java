@@ -11,4 +11,6 @@ public interface UserService {
     HashMap<String,String> info(HashMap<String,String> map);
 
     HashMap<String,String> update(HashMap<String,String> map,HashMap<String,String> headers);
+
+    HashMap<String,String> password(HashMap<String,String> map,HashMap<String,String> headers);
 }

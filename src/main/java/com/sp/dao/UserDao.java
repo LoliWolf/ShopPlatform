@@ -14,4 +14,8 @@ public interface UserDao {
     User get(@Param("uid") int uid);
 
     void update(@Param("uid") int uid,@Param("mobile") String mobile,@Param("username") String username,@Param("address") String address,@Param("sex") String sex);
+
+    String getPassword(@Param("uid") int uid);
+
+    void updatePassword(@Param("uid") int uid,@Param("password") String password);
 }

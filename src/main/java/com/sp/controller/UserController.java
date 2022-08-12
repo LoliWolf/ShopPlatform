@@ -34,4 +34,9 @@ public class UserController {
     private HashMap<String,String> update(@RequestBody HashMap<String,String> map,@RequestHeader HashMap<String,String> headers){
         return user.update(map,headers);
     }
+
+    @RequestMapping("/password")
+    private HashMap<String,String> password(@RequestBody HashMap<String,String> map,@RequestHeader HashMap<String,String> headers){
+        return user.password(map,headers);
+    }
 }

@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 @Service
 @Transactional
@@ -57,6 +56,25 @@ public class UserServiceImpl implements UserService {
         }
         return verify;
 
+    }
+
+    @Override
+    public HashMap<String, String> password(HashMap<String, String> map, HashMap<String, String> headers) {
+        HashMap<String, String> ret = JWTUtils.verify(headers.get("token"));
+        if("success".equals(ret.get("login"))){
+            int uid = Integer.parseInt(ret.get("uid"));
+            ret.remove("uid");
+            String passwordOld = userDao.getPassword(uid);
+            if(passwordOld.equals(map.get("passwordold"))){
+                userDao.updatePassword(uid,map.get("passwordnew"));
+                ret.put("update","success");
+            }else{
+                ret.put("update","failed");
+                ret.put("Exception","Wrong Password");
+            }
+            return ret;
+        }
+        return ret;
     }
 
     @Override
