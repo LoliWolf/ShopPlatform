@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sp.dao.ProductDao">
+    <select id="getProducts" resultType="Product">
+        select pid,image,pname,price,pdetails,(select type_name from item_type where item_type.type_id = #{typeId}) type_name from item_info where type_id =#{typeId} order by rand() limit 0,#{num};
+    </select>
+    <select id="getProductsByType" resultType="Product">
+       select pid,image,pname,price,pdetails,(select type_name from item_type where item_type.type_id = (select type_id from item_type where type_name = #{ptype})) type_name from item_info where type_id = (select type_id from item_type where type_name = #{ptype})  limit 0,20;
+    </select>
+    <select id="getProduct" resultType="Product">
+        select pid,image,pname,pdetails,price,(select type_name from item_type where item_info.type_id = item_type.type_id) type_name from item_info where pid = #{pid};
+    </select>
+    <select id="getProductsByPid" resultType="Product">
+        select pid,image,pname,pdetails,price,(select type_name from item_type where item_info.type_id = item_type.type_id) type_name from item_info where pid = #{pid};
+    </select>
+    <select id="IfProductExist" resultType="int">
+        select count(*) from item_info where pid = #{pid};
+    </select>
+<!--    <insert id="">-->
+<!--        -->
+<!--    </insert>-->
+<!--    <delete id="">-->
+<!--        -->
+<!--    </delete>-->
+<!--    <update id="">-->
+<!--        -->
+<!--    </update>-->
+
+</mapper>

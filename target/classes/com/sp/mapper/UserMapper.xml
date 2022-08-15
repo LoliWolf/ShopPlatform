@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sp.dao.UserDao">
+    <select id="login" resultType="User">
+        select user_id uid,account,password,username,sex,mobile,address from user_info where account = #{account} and password = #{password};
+    </select>
+    <select id="check" resultType="int">
+        select count(account) from user_info where account=#{account};
+    </select>
+    <select id="get" resultType="User">
+        select user_id uid,account,password,username,sex,mobile,address from user_info where user_id=#{uid};
+    </select>
+    <insert id="register">
+        insert into user_info (account, password, username, mobile) values (#{account},#{password},#{username},#{mobile});
+    </insert>
+    <update id="update">
+        update user_info set username=#{username},sex=#{sex},mobile=#{mobile},address=#{address} where user_id=#{uid};
+    </update>
+    <select id="getPassword" resultType="string">
+        select password from user_info where user_id = #{uid};
+    </select>
+    <update id="updatePassword">
+        update user_info set password = #{password} where user_id = #{uid};
+    </update>
+</mapper>

@@ -14,7 +14,7 @@ public class Product {
     private int pid;
     private String type_name;
     private String image;
-    private String pname;
+    private String pname;z
     private String pdetails;
     private float price;
 

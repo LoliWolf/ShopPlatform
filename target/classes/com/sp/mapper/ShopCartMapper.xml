@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sp.dao.ShopCartDao">
+    <select id="getCount" resultType="int">
+        select count(*) from user_cart where pid = #{pid} and user_id = #{uid};
+    </select>
+    <select id="getNum" resultType="int">
+        select num from user_cart where pid = #{pid} and user_id = #{uid};
+    </select>
+    <insert id="add">
+        insert into user_cart values (#{uid},#{pid},#{num});
+    </insert>
+    <delete id="delete">
+        delete from user_cart where pid = #{pid} and user_id = #{uid};
+    </delete>
+    <update id="update">
+        update user_cart set num = num+#{num} where pid = #{pid} and user_id = #{uid};
+    </update>
+    <update id="change">
+        update user_cart set num = #{num} where pid = #{pid} and user_id = #{uid};
+    </update>
+    <select id="getUserCart" resultType="ShopCart">
+        select pid,num from user_cart where user_id = #{uid};
+    </select>
+    <delete id="clear">
+        delete from user_cart where user_id = #{uid};
+    </delete>
+
+</mapper>
